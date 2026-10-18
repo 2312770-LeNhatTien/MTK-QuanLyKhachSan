@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/chung :: head('Đăng ký')}"></head>
+<body>
+<header th:replace="~{layout/khach :: dauTrang}"></header>
+<main class="container auth-section">
+    <div class="auth-intro"><p class="eyebrow">BẮT ĐẦU MỘT TRẢI NGHIỆM MỚI</p><h1>Những kỳ nghỉ<br>đáng mong chờ.</h1><p>Tạo tài khoản để đặt phòng và theo dõi lịch sử lưu trú trong cùng một nơi.</p><div class="auth-ornament" aria-hidden="true"><i class="bi bi-calendar-heart"></i></div></div>
+    <section class="auth-card" aria-labelledby="tieuDe">
+        <p class="eyebrow">TÀI KHOẢN KHÁCH HÀNG</p><h2 id="tieuDe" class="h3 mb-4">Tạo tài khoản</h2>
+        <div th:replace="~{layout/chung :: thongBao}"></div>
+        <form th:action="@{/dang-ky}" th:object="${dangKyDto}" method="post" data-kiem-tra>
+            <div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}"><ul class="mb-0 ps-3"><li th:each="loi : ${#fields.allErrors()}" th:text="${loi}"></li></ul></div>
+            <div class="mb-3"><label class="form-label" for="hoTen">Họ và tên <span aria-hidden="true">*</span></label><input class="form-control" id="hoTen" th:field="*{hoTen}" required maxlength="100" autocomplete="name"></div>
+            <div class="mb-3"><label class="form-label" for="email">Email <span aria-hidden="true">*</span></label><input class="form-control" type="email" id="email" th:field="*{email}" required maxlength="100" autocomplete="email"></div>
+            <div class="mb-3"><label class="form-label" for="sdt">Số điện thoại</label><input class="form-control" type="tel" id="sdt" th:field="*{sdt}" maxlength="15" autocomplete="tel"></div>
+            <div class="mb-3"><label class="form-label" for="diaChi">Địa chỉ</label><input class="form-control" id="diaChi" th:field="*{diaChi}" maxlength="200" autocomplete="street-address"></div>
+            <div class="row g-3"><div class="col-sm-6"><label class="form-label" for="matKhau">Mật khẩu <span aria-hidden="true">*</span></label><input class="form-control" type="password" id="matKhau" name="matKhau" required minlength="6" maxlength="72" autocomplete="new-password"><div class="form-text">Ít nhất 6 ký tự.</div></div><div class="col-sm-6"><label class="form-label" for="xacNhanMatKhau">Xác nhận mật khẩu <span aria-hidden="true">*</span></label><input class="form-control" type="password" id="xacNhanMatKhau" name="xacNhanMatKhau" data-xac-nhan="matKhau" required maxlength="72" autocomplete="new-password"></div></div>
+            <button class="btn btn-primary w-100 mt-4" type="submit">Tạo tài khoản <i class="bi bi-arrow-right ms-2" aria-hidden="true"></i></button>
+        </form>
+        <p class="small text-secondary text-center mt-4 mb-0">Đã có tài khoản? <a th:href="@{/dang-nhap}">Đăng nhập</a></p>
+    </section>
+</main>
+<footer th:replace="~{layout/khach :: chanTrang}"></footer>
+<th:block th:replace="~{layout/chung :: scripts}"></th:block>
+</body>
+</html>

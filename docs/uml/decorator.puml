@@ -1,0 +1,59 @@
+@startuml
+skinparam classAttributeIconSize 0
+title Decorator – tổng tiền và các dòng chi phí
+interface ChiPhiDatPhong {
+ +tinhTien() : BigDecimal
+ +chiTiet() : List<DongChiPhi>
+}
+class DongChiPhi <<record>> {
+ +noiDung : String
+ +cachTinh : String
+ +thanhTien : BigDecimal
+}
+class TienPhong {
+ -dsChiTiet : List<ChiTietDatPhong>
+ -soDem : long
+ +TienPhong(dsChiTiet : List<ChiTietDatPhong>, soDem : long)
+ +tinhTien() : BigDecimal
+ +chiTiet() : List<DongChiPhi>
+}
+abstract class DichVuDecorator {
+ #biBoc : ChiPhiDatPhong
+ #tenDichVu : String
+ #donGia : BigDecimal
+ #soLuong : int
+ #DichVuDecorator(biBoc : ChiPhiDatPhong, tenDichVu : String, donGia : BigDecimal, soLuong : int)
+ +tinhTien() : BigDecimal
+ +chiTiet() : List<DongChiPhi>
+ {abstract} #tienDichVu() : BigDecimal
+ {abstract} #moTaCachTinh() : String
+}
+class DichVuTheoDem {
+ -soDem : long
+ +DichVuTheoDem(biBoc : ChiPhiDatPhong, tenDichVu : String, donGia : BigDecimal, soLuong : int, soDem : long)
+ #tienDichVu() : BigDecimal
+ #moTaCachTinh() : String
+}
+class DichVuMotLan {
+ +DichVuMotLan(biBoc : ChiPhiDatPhong, tenDichVu : String, donGia : BigDecimal, soLuong : int)
+ #tienDichVu() : BigDecimal
+ #moTaCachTinh() : String
+}
+class GhepChiPhi {
+ -GhepChiPhi()
+ {static} +tuDonDatPhong(don : DatPhong) : ChiPhiDatPhong
+}
+ChiPhiDatPhong <|.. TienPhong
+ChiPhiDatPhong <|.. DichVuDecorator
+DichVuDecorator <|-- DichVuTheoDem
+DichVuDecorator <|-- DichVuMotLan
+DichVuDecorator o-- "1" ChiPhiDatPhong : biBoc
+ChiPhiDatPhong ..> DongChiPhi
+GhepChiPhi ..> TienPhong
+GhepChiPhi ..> DichVuTheoDem
+GhepChiPhi ..> DichVuMotLan
+note bottom of GhepChiPhi
+ Tiền phòng → bọc lần lượt dịch vụ.
+ Giá lấy từ chi tiết đơn đã chốt.
+end note
+@enduml

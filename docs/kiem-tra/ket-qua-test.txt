@@ -1,0 +1,14 @@
+[INFO] Tests run: 20, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.608 s -- in vn.edu.dlu.khachsan.integration.Buoc4MySqlIT
+[INFO] Tests run: 89, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.729 s -- in vn.edu.dlu.khachsan.integration.Buoc5SecurityIT
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.147 s -- in vn.edu.dlu.khachsan.integration.Buoc6NghiepVuIT
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.436 s -- in vn.edu.dlu.khachsan.integration.Buoc7KhachHangIT
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.704 s -- in vn.edu.dlu.khachsan.integration.Buoc8LeTanIT
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.562 s -- in vn.edu.dlu.khachsan.integration.Buoc9QuanLyIT
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.019 s -- in vn.edu.dlu.khachsan.pattern.ChiPhiDatPhongTest
+[INFO] Tests run: 19, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.046 s -- in vn.edu.dlu.khachsan.pattern.DatPhongBuilderTest
+[INFO] Tests run: 22, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.067 s -- in vn.edu.dlu.khachsan.pattern.PhuongThucThanhToanTest
+[INFO] Tests run: 26, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.047 s -- in vn.edu.dlu.khachsan.pattern.TrangThaiPhongTest
+[INFO] Tests run: 210, Failures: 0, Errors: 0, Skipped: 0
+[INFO] BUILD SUCCESS
+[INFO] Total time:  30.659 s
+[INFO] Finished at: 2026-10-18T15:52:37+07:00

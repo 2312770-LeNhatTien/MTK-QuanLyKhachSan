@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<body>
+<header th:fragment="dauTrang" class="site-header">
+    <nav class="navbar navbar-expand-lg container py-3" aria-label="Điều hướng chính">
+        <a class="navbar-brand brand" th:href="@{/}"><span class="brand-mark"><i class="bi bi-buildings" aria-hidden="true"></i></span> KHÁCH SẠN</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuKhach" aria-controls="menuKhach" aria-expanded="false" aria-label="Mở menu"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="menuKhach">
+            <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-3">
+                <li class="nav-item"><a class="nav-link" th:href="@{/#hang-phong}">Hạng phòng</a></li>
+                <th:block sec:authorize="isAnonymous()">
+                    <li class="nav-item"><a class="nav-link" th:href="@{/dang-nhap}">Đăng nhập</a></li>
+                    <li class="nav-item"><a class="btn btn-primary" th:href="@{/dang-ky}">Tạo tài khoản <i class="bi bi-arrow-up-right ms-2" aria-hidden="true"></i></a></li>
+                </th:block>
+                <th:block sec:authorize="hasRole('KHACH')">
+                    <li class="nav-item"><a class="nav-link" th:href="@{/dat-phong/lich-su}">Đặt phòng của tôi</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/tai-khoan/doi-mat-khau}">Đổi mật khẩu</a></li>
+                    <li class="nav-item"><form th:action="@{/dang-xuat}" method="post"><button class="btn btn-outline-primary" type="submit">Đăng xuất</button></form></li>
+                </th:block>
+                <th:block sec:authorize="hasAnyRole('VT01','VT02','VT03')">
+                    <li class="nav-item"><a class="btn btn-primary" th:href="@{/admin}">Trang quản trị</a></li>
+                    <li class="nav-item"><form th:action="@{/admin/dang-xuat}" method="post"><button class="btn btn-outline-primary" type="submit">Đăng xuất</button></form></li>
+                </th:block>
+            </ul>
+        </div>
+    </nav>
+</header>
+<footer th:fragment="chanTrang" class="site-footer">
+    <div class="container d-flex flex-wrap gap-3 align-items-center justify-content-between">
+        <div><span class="brand small">KHÁCH SẠN</span><p class="small text-secondary mb-0 mt-2">Một khoảng nghỉ, nhiều trải nghiệm.</p></div>
+        <a class="small text-secondary" th:href="@{/admin/dang-nhap}">Dành cho nhân viên <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+    </div>
+</footer>
+</body>
+</html>

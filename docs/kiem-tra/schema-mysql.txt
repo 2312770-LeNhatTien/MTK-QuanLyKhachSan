@@ -1,0 +1,93 @@
+SoBangNghiepVu
+13
+SoCotNghiepVu
+70
+CONSTRAINT_TYPE	SoLuong
+PRIMARY KEY	13
+UNIQUE	10
+FOREIGN KEY	11
+CHECK	14
+DELETE_RULE	SoLuong
+RESTRICT	11
+TABLE_NAME	COLUMN_NAME	COLUMN_DEFAULT
+DANH_GIA	NgayDanhGia	CURRENT_TIMESTAMP
+DAT_PHONG	NgayDat	CURRENT_TIMESTAMP
+DAT_PHONG	TongTien	0.00
+DAT_PHONG	TrangThai	CHO_THANH_TOAN
+HOA_DON	NgayLap	CURRENT_TIMESTAMP
+HOA_DON	TrangThaiThanhToan	CHUA_THANH_TOAN
+KHACH_HANG	NgayTao	CURRENT_TIMESTAMP
+PHONG	TrangThai	TRONG
+THANH_TOAN	NgayThanhToan	CURRENT_TIMESTAMP
+THANH_TOAN	TrangThai	DANG_XU_LY
+TABLE_NAME	COLUMN_NAME	COLUMN_TYPE	IS_NULLABLE
+CHI_TIET_DAT_PHONG	MaCTDP	varchar(10)	NO
+CHI_TIET_DAT_PHONG	SoLuongKhach	int	NO
+CHI_TIET_DAT_PHONG	GiaThoiDiemDat	decimal(12,2)	NO
+CHI_TIET_DAT_PHONG	MaDatPhong	varchar(10)	NO
+CHI_TIET_DAT_PHONG	MaPhong	varchar(10)	NO
+CHI_TIET_DICH_VU	MaCTDV	varchar(10)	NO
+CHI_TIET_DICH_VU	SoLuong	int	NO
+CHI_TIET_DICH_VU	DonGiaThoiDiemDat	decimal(12,2)	NO
+CHI_TIET_DICH_VU	MaDatPhong	varchar(10)	NO
+CHI_TIET_DICH_VU	MaDichVu	varchar(10)	NO
+DANH_GIA	MaDanhGia	varchar(10)	NO
+DANH_GIA	SoSao	int	NO
+DANH_GIA	NoiDung	varchar(500)	YES
+DANH_GIA	NgayDanhGia	datetime	NO
+DANH_GIA	MaDatPhong	varchar(10)	NO
+DAT_PHONG	MaDatPhong	varchar(10)	NO
+DAT_PHONG	NgayDat	datetime	NO
+DAT_PHONG	NgayNhanPhong	date	NO
+DAT_PHONG	NgayTraPhong	date	NO
+DAT_PHONG	TrangThai	varchar(20)	NO
+DAT_PHONG	TongTien	decimal(12,2)	NO
+DAT_PHONG	MaKH	varchar(10)	NO
+DAT_PHONG	MaNV	varchar(10)	YES
+DICH_VU	MaDichVu	varchar(10)	NO
+DICH_VU	TenDichVu	varchar(100)	NO
+DICH_VU	DonGia	decimal(12,2)	NO
+DICH_VU	CachTinh	varchar(20)	NO
+DICH_VU	DonViTinh	varchar(30)	NO
+DICH_VU	MoTa	varchar(255)	YES
+HOA_DON	MaHoaDon	varchar(10)	NO
+HOA_DON	NgayLap	datetime	NO
+HOA_DON	TongTien	decimal(12,2)	NO
+HOA_DON	TrangThaiThanhToan	varchar(20)	NO
+HOA_DON	MaDatPhong	varchar(10)	NO
+KHACH_HANG	MaKH	varchar(10)	NO
+KHACH_HANG	HoTen	varchar(100)	NO
+KHACH_HANG	Email	varchar(100)	NO
+KHACH_HANG	SDT	varchar(15)	YES
+KHACH_HANG	MatKhau	varchar(255)	NO
+KHACH_HANG	DiaChi	varchar(200)	YES
+KHACH_HANG	NgayTao	datetime	NO
+LOAI_PHONG	MaLoaiPhong	varchar(10)	NO
+LOAI_PHONG	TenLoaiPhong	varchar(50)	NO
+LOAI_PHONG	GiaMoiDem	decimal(12,2)	NO
+LOAI_PHONG	SucChua	int	NO
+LOAI_PHONG	MoTa	varchar(255)	YES
+NHAN_VIEN	MaNV	varchar(10)	NO
+NHAN_VIEN	HoTen	varchar(100)	NO
+NHAN_VIEN	Email	varchar(100)	NO
+NHAN_VIEN	SDT	varchar(15)	YES
+NHAN_VIEN	MatKhau	varchar(255)	NO
+NHAN_VIEN	MaVaiTro	varchar(10)	NO
+PHONG	MaPhong	varchar(10)	NO
+PHONG	SoPhong	varchar(10)	NO
+PHONG	Tang	int	YES
+PHONG	TrangThai	varchar(20)	NO
+PHONG	MaLoaiPhong	varchar(10)	NO
+THAM_SO	MaThamSo	varchar(30)	NO
+THAM_SO	TenThamSo	varchar(100)	NO
+THAM_SO	GiaTri	decimal(12,2)	NO
+THAM_SO	DonVi	varchar(20)	YES
+THANH_TOAN	MaThanhToan	varchar(10)	NO
+THANH_TOAN	PhuongThuc	varchar(20)	NO
+THANH_TOAN	SoTien	decimal(12,2)	NO
+THANH_TOAN	NgayThanhToan	datetime	NO
+THANH_TOAN	TrangThai	varchar(20)	NO
+THANH_TOAN	GhiChu	varchar(200)	YES
+THANH_TOAN	MaHoaDon	varchar(10)	NO
+VAI_TRO	MaVaiTro	varchar(10)	NO
+VAI_TRO	TenVaiTro	varchar(50)	NO

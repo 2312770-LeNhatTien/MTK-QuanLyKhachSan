@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/chung :: head('Lỗi 500')}"></head>
+<body>
+<header th:replace="~{layout/khach :: dauTrang}"></header>
+<main class="error-page"><div class="error-code" aria-hidden="true">500</div><h1>Có một sự cố vừa xảy ra.</h1><p>Chúng tôi chưa thể hoàn tất yêu cầu của bạn. Vui lòng thử lại sau.</p><a class="btn btn-primary" th:href="@{/}"><i class="bi bi-arrow-left me-2" aria-hidden="true"></i>Về trang chủ</a></main>
+<footer th:replace="~{layout/khach :: chanTrang}"></footer>
+<th:block th:replace="~{layout/chung :: scripts}"></th:block>
+</body>
+</html>
+

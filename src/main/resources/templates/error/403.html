@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/chung :: head('Lỗi 403')}"></head>
+<body>
+<header th:replace="~{layout/khach :: dauTrang}"></header>
+<main class="error-page"><div class="error-code" aria-hidden="true">403</div><h1>Bạn chưa thể truy cập trang này.</h1><p>Bạn không có quyền thực hiện thao tác này, hoặc phiên làm việc đã thay đổi. Vui lòng tải lại trang và đăng nhập bằng tài khoản phù hợp.</p><a class="btn btn-primary" th:href="@{/}"><i class="bi bi-arrow-left me-2" aria-hidden="true"></i>Về trang chủ</a></main>
+<footer th:replace="~{layout/khach :: chanTrang}"></footer>
+<th:block th:replace="~{layout/chung :: scripts}"></th:block>
+</body>
+</html>
+

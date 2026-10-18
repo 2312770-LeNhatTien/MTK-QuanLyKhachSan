@@ -1,0 +1,8 @@
+/target/
+/.tools/
+/email-logs/*
+!/email-logs/.gitkeep
+/.idea/
+*.iml
+.env
+*.log

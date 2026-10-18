@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/chung :: head('Lỗi 404')}"></head>
+<body>
+<header th:replace="~{layout/khach :: dauTrang}"></header>
+<main class="error-page"><div class="error-code" aria-hidden="true">404</div><h1>Trang bạn tìm không có ở đây.</h1><p>Trang này không tồn tại. Bạn có thể trở về trang chủ để tiếp tục.</p><a class="btn btn-primary" th:href="@{/}"><i class="bi bi-arrow-left me-2" aria-hidden="true"></i>Về trang chủ</a></main>
+<footer th:replace="~{layout/khach :: chanTrang}"></footer>
+<th:block th:replace="~{layout/chung :: scripts}"></th:block>
+</body>
+</html>
+

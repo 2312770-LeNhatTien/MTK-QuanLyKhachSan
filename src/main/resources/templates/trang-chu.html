@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{layout/chung :: head('Trang chủ')}"></head>
+<body>
+<a class="skip-link" href="#noi-dung">Đến nội dung chính</a>
+<header th:replace="~{layout/khach :: dauTrang}"></header>
+<main id="noi-dung">
+    <section class="container pt-4" aria-label="Tìm phòng trống"><div th:replace="~{dat-phong/form-tim-phong::form('/dat-phong/tim-kiem')}"></div></section>
+    <section class="container hero-section">
+        <div class="hero-copy">
+            <p class="eyebrow"><span class="eyebrow-line"></span> MỖI CHUYẾN ĐI, MỘT KHOẢNG NGHỈ</p>
+            <h1>Chạm vào<br>sự <em>thảnh thơi.</em></h1>
+            <p class="hero-description">Chọn một không gian vừa ý, dành thời gian cho những điều bạn yêu. Kỳ nghỉ của bạn bắt đầu từ đây.</p>
+            <div class="d-flex flex-wrap gap-3"><a class="btn btn-primary btn-lg" href="#hang-phong">Khám phá hạng phòng <i class="bi bi-arrow-right ms-2" aria-hidden="true"></i></a><a class="btn btn-outline-primary btn-lg" sec:authorize="isAnonymous()" th:href="@{/dang-nhap}">Đăng nhập</a></div>
+            <p class="welcome-note" sec:authorize="isAuthenticated()">Rất vui được đón bạn trở lại, <strong th:text="${tenNguoiDung}"></strong>.</p>
+            <div class="hero-note"><i class="bi bi-calendar-heart" aria-hidden="true"></i><span>Tài khoản của bạn, những kỳ nghỉ của bạn.</span></div>
+        </div>
+        <div class="hero-art" role="img" aria-label="Minh họa khách sạn với mái vòm, ánh nắng và cây xanh">
+            <div class="art-sun"></div><div class="art-orbit"></div><div class="art-building"><div class="art-window"></div><div class="art-window"></div><div class="art-window"></div><div class="art-window"></div><div class="art-door"></div></div><div class="art-tree tree-one"></div><div class="art-tree tree-two"></div><div class="art-ground"></div><span class="art-caption">Ở lại. Nghỉ ngơi. Tận hưởng.</span><span class="art-number">01 / KHÔNG GIAN NGHỈ NGƠI</span>
+        </div>
+    </section>
+    <section class="room-section" id="hang-phong">
+        <div class="container">
+            <div class="section-heading"><div><p class="eyebrow">DÀNH CHO CHUYẾN ĐI CỦA BẠN</p><h2>Một không gian vừa ý.</h2></div><p class="text-secondary mb-0">Chọn hạng phòng phù hợp với kỳ nghỉ của bạn.</p></div>
+            <div class="row g-4">
+                <div class="col-md-4" th:each="loai,viTri:${dsLoaiPhong}"><article class="room-card h-100"><div class="room-visual room-standard"><i class="bi bi-door-open" aria-hidden="true"></i><span th:text="${viTri.count}"></span></div><div class="p-4"><h3 class="h4" th:text="${loai.tenLoaiPhong}"></h3><p class="text-secondary" th:text="${loai.moTa}"></p><p class="mb-0"><strong th:text="${@dinhDang.tien(loai.giaMoiDem)}"></strong> / đêm · <span th:text="${loai.sucChua}"></span> khách</p></div></article></div>
+            </div>
+        </div>
+    </section>
+    <section class="container py-5"><h2>Dịch vụ thêm cho kỳ nghỉ</h2><div class="row g-3 mt-2"><div class="col-md-3" th:each="dv:${dsDichVu}"><article class="content-card h-100"><i class="bi bi-stars" aria-hidden="true"></i><h3 class="h5 mt-2" th:text="${dv.tenDichVu}"></h3><p th:text="${@dinhDang.tien(dv.donGia)+' / '+dv.donViTinh}"></p><small th:text="${dv.cachTinh.tenHienThi}"></small></article></div></div></section>
+    <section class="container pb-5"><h2>Khách chia sẻ</h2><p class="text-secondary" th:if="${#lists.isEmpty(dsDanhGia)}">Những chia sẻ sau kỳ nghỉ sẽ xuất hiện tại đây.</p><div class="row g-3"><div class="col-md-4" th:each="dg:${dsDanhGia}"><article class="content-card h-100"><strong th:text="${dg.datPhong.khachHang.hoTen}"></strong><p class="text-warning my-2" th:text="${dg.soSao+' / 5 sao'}"></p><p th:text="${dg.noiDung}"></p><small class="text-secondary" th:text="${@dinhDang.ngayGio(dg.ngayDanhGia)}"></small></article></div></div></section>
+</main>
+<footer th:replace="~{layout/khach :: chanTrang}"></footer>
+<th:block th:replace="~{layout/chung :: scripts}"></th:block>
+</body>
+</html>

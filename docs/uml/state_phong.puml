@@ -1,0 +1,21 @@
+@startuml
+title Các chuyển trạng thái phòng hợp lệ
+state "Trống" as TRONG
+state "Đang có khách" as CO_KHACH
+state "Đang dọn" as DANG_DON
+state "Bảo trì" as BAO_TRI
+[*] --> TRONG
+TRONG --> CO_KHACH : checkIn() / Lễ tân
+CO_KHACH --> DANG_DON : checkOut() / Lễ tân
+DANG_DON --> TRONG : donXong() / Buồng phòng
+TRONG --> BAO_TRI : baoTri() / Buồng phòng
+DANG_DON --> BAO_TRI : baoTri() / Buồng phòng
+BAO_TRI --> TRONG : ketThucBaoTri() / Buồng phòng
+note right of BAO_TRI
+ coTheNhanDat() = false
+end note
+note bottom of DANG_DON
+ Đặt phòng không đổi trạng thái.
+ Mọi thao tác ngoài các mũi tên đều bị từ chối.
+end note
+@enduml

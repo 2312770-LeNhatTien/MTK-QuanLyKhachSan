@@ -1,0 +1,57 @@
+@startuml
+skinparam classAttributeIconSize 0
+title Strategy – chọn phương thức bằng Map
+interface PhuongThucThanhToan {
+ +getMa() : String
+ +getTenHienThi() : String
+ +dungTaiQuay() : boolean
+ +xuLy(giaoDich : ThanhToan, duLieu : DuLieuThanhToan) : KetQuaXuLy
+}
+class ThanhToanTrucTuyen {
+ +getMa() : String
+ +getTenHienThi() : String
+ +dungTaiQuay() : boolean
+ +xuLy(giaoDich : ThanhToan, duLieu : DuLieuThanhToan) : KetQuaXuLy
+}
+class ThanhToanTienMat {
+ +getMa() : String
+ +getTenHienThi() : String
+ +dungTaiQuay() : boolean
+ +xuLy(giaoDich : ThanhToan, duLieu : DuLieuThanhToan) : KetQuaXuLy
+}
+class ThanhToanThe {
+ +getMa() : String
+ +getTenHienThi() : String
+ +dungTaiQuay() : boolean
+ +xuLy(giaoDich : ThanhToan, duLieu : DuLieuThanhToan) : KetQuaXuLy
+}
+class DuLieuThanhToan <<record>> {
+ +tienKhachDua : BigDecimal
+ +maChuanChi : String
+}
+class KetQuaXuLy <<record>> {
+ +trangThai : TrangThaiGiaoDich
+ +thongBao : String
+ +urlChuyenHuong : String
+}
+class ThanhToanService <<Context>> {
+ -dsPhuongThuc : Map<String,PhuongThucThanhToan>
+ +layPhuongThuc(ma : String) : PhuongThucThanhToan
+ +phuongThucTrucTuyen() : List<PhuongThucThanhToan>
+ +phuongThucTaiQuay() : List<PhuongThucThanhToan>
+ +batDauTrucTuyen(ma : String, email : String, dto : ThanhToanDto) : KetQuaXuLy
+ +thanhToan(maHoaDon : String, soTien : BigDecimal, maPhuongThuc : String, duLieu : DuLieuThanhToan) : KetQuaXuLy
+ +xacNhanTrucTuyen(ma : String, thanhCong : boolean, email : String) : void
+}
+PhuongThucThanhToan <|.. ThanhToanTrucTuyen
+PhuongThucThanhToan <|.. ThanhToanTienMat
+PhuongThucThanhToan <|.. ThanhToanThe
+ThanhToanService o-- "3" PhuongThucThanhToan : Map nhận từ Spring
+PhuongThucThanhToan ..> DuLieuThanhToan
+PhuongThucThanhToan ..> KetQuaXuLy
+note bottom of ThanhToanService
+ Không if/switch theo mã phương thức.
+ Tổng đã trả chỉ cộng giao dịch Thành công.
+ Callback giả lập idempotent.
+end note
+@enduml

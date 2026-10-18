@@ -1,0 +1,50 @@
+@startuml
+skinparam classAttributeIconSize 0
+title Builder – tạo đơn và chốt giá
+class DatPhongBuilder {
+ -dongHo : Clock
+ -khachHang : KhachHang
+ -ngayNhanPhong : LocalDate
+ -ngayTraPhong : LocalDate
+ -dsPhong : List<PhongChon>
+ -dsDichVu : List<DichVuChon>
+ +DatPhongBuilder()
+ +DatPhongBuilder(dongHo : Clock)
+ +choKhachHang(kh : KhachHang) : DatPhongBuilder
+ +ngayNhanPhong(ngay : LocalDate) : DatPhongBuilder
+ +ngayTraPhong(ngay : LocalDate) : DatPhongBuilder
+ +themPhong(phong : Phong, soKhach : int) : DatPhongBuilder
+ +themDichVu(dichVu : DichVu, soLuong : int) : DatPhongBuilder
+ +build() : DatPhong
+}
+class PhongChon <<record>> {
+ +phong : Phong
+ +soKhach : int
+}
+class DichVuChon <<record>> {
+ +dichVu : DichVu
+ +soLuong : int
+}
+class DatPhong <<entity>>
+class ChiTietDatPhong <<entity>>
+class ChiTietDichVu <<entity>>
+class GhepChiPhi <<Decorator>> {
+ {static} +tuDonDatPhong(don : DatPhong) : ChiPhiDatPhong
+}
+class DatPhongService {
+ +tamTinh(email : String, dto : DatPhongDto) : DatPhong
+ +taoDonTam(email : String, dto : DatPhongDto) : DatPhong
+}
+DatPhongBuilder *-- "0..*" PhongChon
+DatPhongBuilder *-- "0..*" DichVuChon
+DatPhongBuilder ..> DatPhong : tạo
+DatPhongBuilder ..> GhepChiPhi : tính tổng
+DatPhong *-- "1..*" ChiTietDatPhong
+DatPhong *-- "0..*" ChiTietDichVu
+DatPhongService ..> DatPhongBuilder
+note bottom of DatPhongBuilder
+ Kiểm tra khách, ngày, phòng, sức chứa,
+ bảo trì, trùng dòng, số lượng dịch vụ.
+ Service kiểm tra trùng lịch sau khi khóa phòng.
+end note
+@enduml

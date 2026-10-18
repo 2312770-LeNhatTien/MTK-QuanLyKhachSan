@@ -1,0 +1,82 @@
+@startuml
+skinparam classAttributeIconSize 0
+title State – Context Phong ủy quyền cho trạng thái
+class Phong <<entity, Context>> {
+ -trangThai : String
+ +layTrangThai() : TrangThaiPhong
+ +chuyenSang(moi : TrangThaiPhong) : void
+ +checkIn() : void
+ +checkOut() : void
+ +donXong() : void
+ +baoTri() : void
+ +ketThucBaoTri() : void
+}
+interface TrangThaiPhong {
+ {static} CAC_TRANG_THAI : Map<String,TrangThaiPhong>
+ +getMa() : String
+ +getTenHienThi() : String
+ +coTheNhanDat() : boolean
+ +thaoTacHopLe() : Set<ThaoTacPhong>
+ +checkIn(phong : Phong) : void
+ +checkOut(phong : Phong) : void
+ +donXong(phong : Phong) : void
+ +baoTri(phong : Phong) : void
+ +ketThucBaoTri(phong : Phong) : void
+ {static} +tuMa(ma : String) : TrangThaiPhong
+}
+abstract class TrangThaiPhongCoBan {
+ +coTheNhanDat() : boolean
+ +checkIn(phong : Phong) : void
+ +checkOut(phong : Phong) : void
+ +donXong(phong : Phong) : void
+ +baoTri(phong : Phong) : void
+ +ketThucBaoTri(phong : Phong) : void
+ -tuChoi(phong : Phong, thaoTac : String) : NghiepVuException
+}
+class PhongTrong {
+ +getMa() : String
+ +getTenHienThi() : String
+ +thaoTacHopLe() : Set<ThaoTacPhong>
+ +checkIn(phong : Phong) : void
+ +baoTri(phong : Phong) : void
+}
+class PhongCoKhach {
+ +getMa() : String
+ +getTenHienThi() : String
+ +thaoTacHopLe() : Set<ThaoTacPhong>
+ +checkOut(phong : Phong) : void
+}
+class PhongDangDon {
+ +getMa() : String
+ +getTenHienThi() : String
+ +thaoTacHopLe() : Set<ThaoTacPhong>
+ +donXong(phong : Phong) : void
+ +baoTri(phong : Phong) : void
+}
+class PhongBaoTri {
+ +getMa() : String
+ +getTenHienThi() : String
+ +thaoTacHopLe() : Set<ThaoTacPhong>
+ +coTheNhanDat() : boolean
+ +ketThucBaoTri(phong : Phong) : void
+}
+enum ThaoTacPhong {
+ CHECK_IN
+ CHECK_OUT
+ DON_XONG
+ BAO_TRI
+ KET_THUC_BAO_TRI
+}
+Phong --> TrangThaiPhong : ủy quyền qua tuMa()
+TrangThaiPhong <|.. TrangThaiPhongCoBan
+TrangThaiPhongCoBan <|-- PhongTrong
+TrangThaiPhongCoBan <|-- PhongCoKhach
+TrangThaiPhongCoBan <|-- PhongDangDon
+TrangThaiPhongCoBan <|-- PhongBaoTri
+TrangThaiPhong ..> ThaoTacPhong
+TrangThaiPhong ..> Phong : thao tác / chuyển trạng thái
+note bottom of TrangThaiPhongCoBan
+ Mặc định từ chối thao tác bằng thông báo tiếng Việt.
+ Lớp cụ thể chỉ ghi đè thao tác hợp lệ.
+end note
+@enduml

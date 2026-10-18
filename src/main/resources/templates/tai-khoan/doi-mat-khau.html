@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/chung :: head('Đổi mật khẩu')}"></head>
+<body>
+<header th:replace="~{layout/khach :: dauTrang}"></header>
+<main class="container page-section">
+    <section class="auth-card mx-auto" aria-labelledby="tieuDe">
+        <p class="eyebrow">BẢO MẬT TÀI KHOẢN</p><h1 class="h3" id="tieuDe">Đổi mật khẩu</h1><p class="text-secondary mb-4">Bạn sẽ đăng nhập lại sau khi đổi mật khẩu thành công.</p>
+        <div th:replace="~{layout/chung :: thongBao}"></div>
+        <form th:action="@{/tai-khoan/doi-mat-khau}" th:object="${doiMatKhauDto}" method="post" data-kiem-tra>
+            <div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}"><ul class="mb-0 ps-3"><li th:each="loi : ${#fields.allErrors()}" th:text="${loi}"></li></ul></div>
+            <div class="mb-3"><label class="form-label" for="matKhauHienTai">Mật khẩu hiện tại</label><input class="form-control" type="password" id="matKhauHienTai" name="matKhauHienTai" required autocomplete="current-password"></div>
+            <div class="mb-3"><label class="form-label" for="matKhauMoi">Mật khẩu mới</label><input class="form-control" type="password" id="matKhauMoi" name="matKhauMoi" required minlength="6" maxlength="72" autocomplete="new-password"><div class="form-text">Ít nhất 6 ký tự.</div></div>
+            <div class="mb-4"><label class="form-label" for="xacNhanMatKhau">Xác nhận mật khẩu mới</label><input class="form-control" type="password" id="xacNhanMatKhau" name="xacNhanMatKhau" data-xac-nhan="matKhauMoi" required maxlength="72" autocomplete="new-password"></div>
+            <button class="btn btn-primary w-100" type="submit">Lưu mật khẩu mới</button>
+        </form>
+    </section>
+</main>
+<footer th:replace="~{layout/khach :: chanTrang}"></footer>
+<th:block th:replace="~{layout/chung :: scripts}"></th:block>
+</body>
+</html>

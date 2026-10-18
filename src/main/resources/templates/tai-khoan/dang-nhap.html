@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/chung :: head('Đăng nhập')}"></head>
+<body>
+<header th:replace="~{layout/khach :: dauTrang}"></header>
+<main class="container auth-section">
+    <div class="auth-intro"><p class="eyebrow">CHÀO MỪNG TRỞ LẠI</p><h1>Kỳ nghỉ tiếp theo<br>đang chờ bạn.</h1><p>Đăng nhập để quản lý những lần lưu trú của bạn.</p><div class="auth-ornament" aria-hidden="true"><i class="bi bi-door-open"></i></div></div>
+    <section class="auth-card" aria-labelledby="tieuDe">
+        <p class="eyebrow">TÀI KHOẢN KHÁCH HÀNG</p><h2 id="tieuDe" class="h3 mb-2">Đăng nhập</h2><p class="text-secondary mb-4">Dùng email và mật khẩu đã đăng ký.</p>
+        <div class="alert alert-danger" role="alert" th:if="${param.loi != null}">Email hoặc mật khẩu không đúng.</div>
+        <div class="alert alert-success" role="status" th:if="${param['dang-xuat'] != null}">Bạn đã đăng xuất.</div>
+        <div class="alert alert-success" role="status" th:if="${param['dang-ky-thanh-cong'] != null}">Đăng ký thành công. Bạn có thể đăng nhập ngay.</div>
+        <div class="alert alert-success" role="status" th:if="${param['doi-mat-khau-thanh-cong'] != null}">Đổi mật khẩu thành công. Vui lòng đăng nhập lại.</div>
+        <form th:action="@{/dang-nhap}" method="post" data-kiem-tra>
+            <div class="mb-3"><label class="form-label" for="email">Email</label><input class="form-control" type="email" id="email" name="email" required maxlength="100" autocomplete="username" placeholder="ban@example.com"></div>
+            <div class="mb-4"><label class="form-label" for="password">Mật khẩu</label><input class="form-control" type="password" id="password" name="password" required autocomplete="current-password"></div>
+            <button class="btn btn-primary w-100" type="submit">Đăng nhập <i class="bi bi-arrow-right ms-2" aria-hidden="true"></i></button>
+        </form>
+        <p class="small text-secondary text-center mt-4 mb-0">Chưa có tài khoản? <a th:href="@{/dang-ky}">Đăng ký ngay</a></p>
+    </section>
+</main>
+<footer th:replace="~{layout/khach :: chanTrang}"></footer>
+<th:block th:replace="~{layout/chung :: scripts}"></th:block>
+</body>
+</html>

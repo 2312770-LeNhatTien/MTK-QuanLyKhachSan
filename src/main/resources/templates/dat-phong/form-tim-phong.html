@@ -1,0 +1,9 @@
+<!DOCTYPE html><html lang="vi" xmlns:th="http://www.thymeleaf.org"><body>
+<form th:fragment="form(duongDan)" th:action="@{${duongDan}}" th:object="${timPhongDto}" method="get" class="search-panel row g-3 align-items-end" data-kiem-tra>
+    <div class="col-12 alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}"><ul class="mb-0"><li th:each="loi:${#fields.allErrors()}" th:text="${loi}"></li></ul></div>
+    <div class="col-md-3"><label for="ngayNhanPhong" class="form-label">Ngày nhận phòng</label><input type="date" class="form-control" th:field="*{ngayNhanPhong}" required th:min="${#temporals.format(#temporals.createToday(),'yyyy-MM-dd')}"></div>
+    <div class="col-md-3"><label for="ngayTraPhong" class="form-label">Ngày trả phòng</label><input type="date" class="form-control" th:field="*{ngayTraPhong}" required></div>
+    <div class="col-md-2"><label for="soKhach" class="form-label">Khách mỗi phòng</label><input type="number" class="form-control" th:field="*{soKhach}" min="1" required></div>
+    <div class="col-md-2"><label for="maLoaiPhong" class="form-label">Hạng phòng</label><select class="form-select" th:field="*{maLoaiPhong}"><option value="">Tất cả</option><option th:each="l:${dsLoaiPhong}" th:value="${l.maLoaiPhong}" th:text="${l.tenLoaiPhong}"></option></select></div>
+    <div class="col-md-2"><button class="btn btn-primary w-100" type="submit"><i class="bi bi-search me-2" aria-hidden="true"></i>Tìm phòng</button></div>
+</form></body></html>

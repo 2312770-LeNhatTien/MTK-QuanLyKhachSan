@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head(tieuDe)">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="_csrf" th:content="${_csrf.token}" th:if="${_csrf != null}">
+    <meta name="_csrf_header" th:content="${_csrf.headerName}" th:if="${_csrf != null}">
+    <title th:text="${tieuDe} + ' | Khách sạn'">Khách sạn</title>
+    <link rel="stylesheet" th:href="@{/vendor/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/vendor/bootstrap-icons/bootstrap-icons.min.css}">
+    <link rel="stylesheet" th:href="@{/css/ung-dung.css}">
+</head>
+<body>
+<div th:fragment="thongBao">
+    <div class="alert alert-danger" role="alert" th:if="${thongBaoLoi}" th:text="${thongBaoLoi}"></div>
+    <div class="alert alert-success" role="status" th:if="${thanhCong}" th:text="${thanhCong}"></div>
+</div>
+<th:block th:fragment="scripts">
+    <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/js/ung-dung.js}"></script>
+</th:block>
+</body>
+</html>

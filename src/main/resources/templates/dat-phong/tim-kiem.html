@@ -1,0 +1,14 @@
+<!DOCTYPE html><html lang="vi" xmlns:th="http://www.thymeleaf.org"><head th:replace="~{layout/chung::head('Tìm phòng trống')}"></head><body th:class="${quanTri}?'admin-body':''">
+<th:block th:if="${!quanTri}"><header th:replace="~{layout/khach::dauTrang}"></header></th:block>
+<div th:class="${quanTri}?'admin-shell':''"><th:block th:if="${quanTri}"><aside th:replace="~{layout/admin::sidebar}"></aside></th:block><div th:class="${quanTri}?'admin-main':''">
+<th:block th:if="${quanTri}"><header th:replace="~{layout/admin::topbar}"></header></th:block>
+<main th:class="${quanTri}?'admin-content':'container page-section'"><p class="eyebrow">LÊN KẾ HOẠCH CHO KỲ NGHỈ</p><h1 class="h2 mb-4">Tìm phòng trống</h1>
+<div th:replace="~{layout/chung::thongBao}"></div>
+<div th:replace="~{dat-phong/form-tim-phong::form(${quanTri}?'/admin/tim-phong':'/dat-phong/tim-kiem')}"></div>
+<p class="text-secondary my-4" th:if="${#lists.isEmpty(ketQua)}">Chưa có phòng phù hợp. Vui lòng kiểm tra ngày và thử lựa chọn khác.</p>
+<form th:action="@{/dat-phong/xac-nhan}" method="get" data-chon-phong>
+<input type="hidden" name="ngayNhanPhong" th:value="${timPhongDto.ngayNhanPhong}"><input type="hidden" name="ngayTraPhong" th:value="${timPhongDto.ngayTraPhong}"><input type="hidden" name="soKhach" th:value="${timPhongDto.soKhach}">
+<article class="content-card my-4" th:each="k:${ketQua}"><div class="d-flex flex-wrap justify-content-between gap-3"><div><h2 class="h4" th:text="${k.loaiPhong.tenLoaiPhong}"></h2><p class="text-secondary"><span th:text="${k.loaiPhong.sucChua}"></span> khách / phòng · <span th:text="${@dinhDang.tien(k.loaiPhong.giaMoiDem)}"></span> / đêm</p><p th:if="${k.loaiPhong.moTa}" th:text="${k.loaiPhong.moTa}"></p></div><div><strong th:text="${@dinhDang.tien(k.giaDuKien)}"></strong><div class="small text-secondary">mỗi phòng / cả kỳ lưu trú</div><span class="badge text-bg-light mt-2"><span th:text="${#lists.size(k.dsPhong)}"></span> phòng còn trống</span></div></div>
+<div class="d-flex flex-wrap gap-3"><label th:each="p:${k.dsPhong}" class="room-choice"><input th:if="${!quanTri}" type="checkbox" name="maPhong" th:value="${p.maPhong}" class="form-check-input me-2"><span>Phòng <span th:text="${p.soPhong}"></span></span></label></div></article>
+<button th:if="${!quanTri and !#lists.isEmpty(ketQua)}" class="btn btn-primary" type="submit">Tiếp tục đặt phòng <i class="bi bi-arrow-right ms-2" aria-hidden="true"></i></button></form>
+</main></div></div><th:block th:if="${!quanTri}"><footer th:replace="~{layout/khach::chanTrang}"></footer></th:block><th:block th:replace="~{layout/chung::scripts}"></th:block><script th:src="@{/js/dat-phong.js}"></script></body></html>
