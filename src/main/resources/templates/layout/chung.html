@@ -5,10 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="_csrf" th:content="${_csrf.token}" th:if="${_csrf != null}">
     <meta name="_csrf_header" th:content="${_csrf.headerName}" th:if="${_csrf != null}">
-    <title th:text="${tieuDe} + ' | Khách sạn'">Khách sạn</title>
+    <title th:text="${tieuDe} + ' | Đà Lạt Stay'">Đà Lạt Stay</title>
+    <link rel="preload" th:href="@{/vendor/fonts/BeVietnamPro-Regular.ttf}" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" th:href="@{/vendor/fonts/PlayfairDisplay-Variable.ttf}" as="font" type="font/ttf" crossorigin>
     <link rel="stylesheet" th:href="@{/vendor/bootstrap/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/vendor/bootstrap-icons/bootstrap-icons.min.css}">
     <link rel="stylesheet" th:href="@{/css/ung-dung.css}">
+    <link rel="stylesheet" th:href="@{/css/site.css}">
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
 </head>
 <body>
 <div th:fragment="thongBao">
@@ -18,6 +22,7 @@
 <th:block th:fragment="scripts">
     <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
     <script th:src="@{/js/ung-dung.js}"></script>
+    <script th:src="@{/js/site.js}"></script>
 </th:block>
 </body>
 </html>

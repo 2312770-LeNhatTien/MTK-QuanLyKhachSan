@@ -1,36 +1,34 @@
 <!DOCTYPE html>
 <html lang="vi" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="~{layout/chung :: head('Trang chủ')}"></head>
-<body>
+<body class="stay-home">
 <a class="skip-link" href="#noi-dung">Đến nội dung chính</a>
 <header th:replace="~{layout/khach :: dauTrang}"></header>
 <main id="noi-dung">
-    <section class="container pt-4" aria-label="Tìm phòng trống"><div th:replace="~{dat-phong/form-tim-phong::form('/dat-phong/tim-kiem')}"></div></section>
-    <section class="container hero-section">
-        <div class="hero-copy">
-            <p class="eyebrow"><span class="eyebrow-line"></span> MỖI CHUYẾN ĐI, MỘT KHOẢNG NGHỈ</p>
-            <h1>Chạm vào<br>sự <em>thảnh thơi.</em></h1>
-            <p class="hero-description">Chọn một không gian vừa ý, dành thời gian cho những điều bạn yêu. Kỳ nghỉ của bạn bắt đầu từ đây.</p>
-            <div class="d-flex flex-wrap gap-3"><a class="btn btn-primary btn-lg" href="#hang-phong">Khám phá hạng phòng <i class="bi bi-arrow-right ms-2" aria-hidden="true"></i></a><a class="btn btn-outline-primary btn-lg" sec:authorize="isAnonymous()" th:href="@{/dang-nhap}">Đăng nhập</a></div>
-            <p class="welcome-note" sec:authorize="isAuthenticated()">Rất vui được đón bạn trở lại, <strong th:text="${tenNguoiDung}"></strong>.</p>
-            <div class="hero-note"><i class="bi bi-calendar-heart" aria-hidden="true"></i><span>Tài khoản của bạn, những kỳ nghỉ của bạn.</span></div>
-        </div>
-        <div class="hero-art" role="img" aria-label="Minh họa khách sạn với mái vòm, ánh nắng và cây xanh">
-            <div class="art-sun"></div><div class="art-orbit"></div><div class="art-building"><div class="art-window"></div><div class="art-window"></div><div class="art-window"></div><div class="art-window"></div><div class="art-door"></div></div><div class="art-tree tree-one"></div><div class="art-tree tree-two"></div><div class="art-ground"></div><span class="art-caption">Ở lại. Nghỉ ngơi. Tận hưởng.</span><span class="art-number">01 / KHÔNG GIAN NGHỈ NGƠI</span>
-        </div>
+    <section class="stay-hero" aria-labelledby="hero-title">
+        <div class="stay-hero-background stay-media" data-hotel-media><img th:src="@{/img/hero.jpg}" alt="Không gian nghỉ dưỡng tại Đà Lạt Stay" data-hotel-image fetchpriority="high"><div class="stay-hero-shade"></div></div>
+        <div class="container stay-hero-content"><p class="stay-eyebrow stay-eyebrow-light"><span></span> MỘT CHÚT ĐÀ LẠT, MỘT CHÚT BÌNH YÊN</p><h1 id="hero-title">Giữa phố núi,<br>tìm một khoảng <em>thảnh thơi.</em></h1><p class="stay-hero-description">Chạm vào nhịp sống chậm giữa phố núi.<br> Chọn một căn phòng ấm áp, tận hưởng Đà Lạt theo cách của bạn.</p><a class="stay-hero-link" href="#hang-phong">Khám phá không gian nghỉ <i class="bi bi-arrow-down-right" aria-hidden="true"></i></a></div>
+        <div class="container stay-search-wrap"><div class="stay-search-heading"><i class="bi bi-calendar2-week" aria-hidden="true"></i> Kỳ nghỉ của bạn bắt đầu từ đây</div><div class="stay-home-search" aria-label="Tìm phòng trống"><div th:replace="~{dat-phong/form-tim-phong::form('/dat-phong/tim-kiem')}"></div></div></div>
     </section>
-    <section class="room-section" id="hang-phong">
-        <div class="container">
-            <div class="section-heading"><div><p class="eyebrow">DÀNH CHO CHUYẾN ĐI CỦA BẠN</p><h2>Một không gian vừa ý.</h2></div><p class="text-secondary mb-0">Chọn hạng phòng phù hợp với kỳ nghỉ của bạn.</p></div>
+    <section class="stay-section stay-rooms" id="hang-phong" aria-labelledby="rooms-title">
+        <div class="container"><div class="stay-section-heading"><div><p class="stay-eyebrow">KHÔNG GIAN NGHỈ NGƠI</p><h2 id="rooms-title">Chọn một nơi để <em>an yên.</em></h2></div><p>Thoải mái trong từng chi tiết.<br> Vừa vặn với mỗi chuyến đi.</p></div>
             <div class="row g-4">
-                <div class="col-md-4" th:each="loai,viTri:${dsLoaiPhong}"><article class="room-card h-100"><div class="room-visual room-standard"><i class="bi bi-door-open" aria-hidden="true"></i><span th:text="${viTri.count}"></span></div><div class="p-4"><h3 class="h4" th:text="${loai.tenLoaiPhong}"></h3><p class="text-secondary" th:text="${loai.moTa}"></p><p class="mb-0"><strong th:text="${@dinhDang.tien(loai.giaMoiDem)}"></strong> / đêm · <span th:text="${loai.sucChua}"></span> khách</p></div></article></div>
+                <div class="col-md-4" th:each="loai:${dsLoaiPhong}"><article class="stay-room-card">
+                    <div class="stay-room-media stay-media" data-hotel-media><div class="stay-media-fallback"><i class="bi bi-door-open" aria-hidden="true"></i><span th:text="${loai.tenLoaiPhong}"></span><small>ĐÀ LẠT STAY</small></div><img th:if="${loai.maLoaiPhong=='LP001' or loai.maLoaiPhong=='LP002' or loai.maLoaiPhong=='LP003'}" th:src="@{'/img/'+${loai.maLoaiPhong=='LP001'?'phong-standard.jpg':(loai.maLoaiPhong=='LP002'?'phong-deluxe.jpg':'phong-family.jpg')}}" th:alt="${'Không gian phòng '+loai.tenLoaiPhong}" loading="lazy" data-hotel-image></div>
+                    <div class="stay-room-content"><div class="stay-room-heading"><h3 th:text="${loai.tenLoaiPhong}"></h3><span><i class="bi bi-people" aria-hidden="true"></i> <span th:text="${loai.sucChua}"></span> khách</span></div><p class="stay-room-description" th:text="${#strings.isEmpty(loai.moTa)?'Không gian ấm áp, thoải mái cho những ngày nghỉ giữa phố núi.':loai.moTa}"></p><div class="stay-room-bottom"><div><strong th:text="${@dinhDang.tien(loai.giaMoiDem)}"></strong><span> / đêm</span></div><a th:href="@{/dat-phong/tim-kiem(maLoaiPhong=${loai.maLoaiPhong})}" class="stay-room-link" th:aria-label="${'Tìm phòng '+loai.tenLoaiPhong}"><i class="bi bi-arrow-up-right" aria-hidden="true"></i></a></div></div>
+                </article></div>
             </div>
         </div>
     </section>
-    <section class="container py-5"><h2>Dịch vụ thêm cho kỳ nghỉ</h2><div class="row g-3 mt-2"><div class="col-md-3" th:each="dv:${dsDichVu}"><article class="content-card h-100"><i class="bi bi-stars" aria-hidden="true"></i><h3 class="h5 mt-2" th:text="${dv.tenDichVu}"></h3><p th:text="${@dinhDang.tien(dv.donGia)+' / '+dv.donViTinh}"></p><small th:text="${dv.cachTinh.tenHienThi}"></small></article></div></div></section>
-    <section class="container pb-5"><h2>Khách chia sẻ</h2><p class="text-secondary" th:if="${#lists.isEmpty(dsDanhGia)}">Những chia sẻ sau kỳ nghỉ sẽ xuất hiện tại đây.</p><div class="row g-3"><div class="col-md-4" th:each="dg:${dsDanhGia}"><article class="content-card h-100"><strong th:text="${dg.datPhong.khachHang.hoTen}"></strong><p class="text-warning my-2" th:text="${dg.soSao+' / 5 sao'}"></p><p th:text="${dg.noiDung}"></p><small class="text-secondary" th:text="${@dinhDang.ngayGio(dg.ngayDanhGia)}"></small></article></div></div></section>
+    <section class="stay-section stay-services" id="dich-vu" aria-labelledby="services-title"><div class="container"><div class="stay-section-heading"><div><p class="stay-eyebrow">CHĂM CHÚT TỪNG TRẢI NGHIỆM</p><h2 id="services-title">Thêm một chút <em>trọn vẹn.</em></h2></div><p>Những tiện ích nhỏ để bạn<br> thảnh thơi hơn trong kỳ nghỉ.</p></div><div class="row g-4"><div class="col-sm-6 col-lg-3" th:each="dv:${dsDichVu}"><article class="stay-service-card"><span class="stay-service-icon"><i class="bi" th:classappend="${dv.maDichVu=='DV01'?'bi-cup-hot':(dv.maDichVu=='DV02'?'bi-moon-stars':(dv.maDichVu=='DV03'?'bi-car-front':'bi-basket'))}" aria-hidden="true"></i></span><h3 th:text="${dv.tenDichVu}"></h3><p><strong th:text="${@dinhDang.tien(dv.donGia)}"></strong><span th:text="${' / '+dv.donViTinh}"></span></p><small th:text="${dv.cachTinh.tenHienThi}"></small></article></div></div></div></section>
+    <section class="stay-section stay-reviews" id="danh-gia" aria-labelledby="reviews-title"><div class="container"><div class="stay-section-heading"><div><p class="stay-eyebrow">DẤU ẤN SAU MỖI KỲ NGHỈ</p><h2 id="reviews-title">Những lời thương <em>gửi lại.</em></h2></div><p>Mỗi chia sẻ là một câu chuyện<br> chúng tôi luôn trân trọng.</p></div>
+        <div class="stay-review-empty" th:if="${#lists.isEmpty(dsDanhGia)}"><span class="stay-quote-icon"><i class="bi bi-chat-quote" aria-hidden="true"></i></span><div><h3>Kỳ nghỉ đẹp, câu chuyện đáng nhớ.</h3><p>Những chia sẻ của khách sau kỳ nghỉ sẽ được lưu lại tại đây.</p></div><a class="btn btn-outline-primary" href="#hang-phong">Tìm kỳ nghỉ của bạn <i class="bi bi-arrow-right ms-2" aria-hidden="true"></i></a></div>
+        <div class="row g-4" th:unless="${#lists.isEmpty(dsDanhGia)}"><div class="col-md-6 col-lg-4" th:each="dg:${dsDanhGia}"><article class="stay-review-card"><div class="stay-review-stars" role="img" th:aria-label="${dg.soSao+' trên 5 sao'}"><i class="bi" th:each="n:${#numbers.sequence(1,5)}" th:classappend="${n<=dg.soSao?'bi-star-fill':'bi-star'}" aria-hidden="true"></i></div><p class="stay-review-text" th:text="${#strings.isEmpty(dg.noiDung)?'Khách đã đánh giá kỳ nghỉ tại Đà Lạt Stay.':dg.noiDung}"></p><div class="stay-review-author"><span class="stay-review-avatar"><i class="bi bi-person" aria-hidden="true"></i></span><div><strong th:text="${dg.datPhong.khachHang.hoTen}"></strong><small th:text="${@dinhDang.ngayGio(dg.ngayDanhGia)}"></small></div><i class="bi bi-quote stay-review-quote" aria-hidden="true"></i></div></article></div></div>
+    </div></section>
 </main>
 <footer th:replace="~{layout/khach :: chanTrang}"></footer>
 <th:block th:replace="~{layout/chung :: scripts}"></th:block>
 </body>
 </html>
+
+
